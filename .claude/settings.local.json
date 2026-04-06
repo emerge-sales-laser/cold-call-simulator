@@ -23,7 +23,12 @@
       "Bash(taskkill //F //IM node.exe)",
       "Bash(curl -s -m 5 http://localhost:5000/)",
       "Bash(curl -s -m 3 -o /dev/null -w \"%{http_code}\" http://localhost:5000/)",
-      "Bash(npx vite:*)"
+      "Bash(npx vite:*)",
+      "Bash(gh repo:*)",
+      "Bash(gh auth:*)",
+      "Bash(npx gh-pages:*)",
+      "Bash(gh api:*)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" https://deansperduti23-laser.github.io/cold-call-simulator/)"
     ]
   }
 }

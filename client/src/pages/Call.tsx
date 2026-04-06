@@ -391,7 +391,7 @@ export default function Call() {
 
   if (showIntro) {
     return (<div className="min-h-screen bg-[#e8ecf0]">
-      <div className="bg-[#1565a7] text-white flex items-center justify-between px-3 py-1.5"><div className="flex items-center gap-4"><span className="font-bold text-sm tracking-wide">VanillaSoft</span><div className="flex items-center gap-3 text-xs text-blue-100"><span>Menu</span><span>Calendar</span><span>Documents</span><span>My CRM</span></div></div><div className="text-sm font-semibold">Emerge, Inc.</div></div>
+      <div className="bg-[#1565a7] text-white flex items-center justify-between px-3 py-1.5"><div className="flex items-center gap-4"><span className="font-bold text-sm tracking-wide">Emerge CRM</span><div className="flex items-center gap-3 text-xs text-blue-100"><span>Menu</span><span>Calendar</span><span>Documents</span><span>My CRM</span></div></div><div className="text-sm font-semibold">Emerge, Inc.</div></div>
       <div className="bg-[#2980c9] px-3 py-1"><span className="text-white font-semibold text-xs">Emerge Sales Leads</span></div>
       <div className="h-[calc(100vh-60px)] bg-[#e8ecf0]" /><IntroPopup onStart={handleIntroStart} /></div>);
   }
@@ -406,7 +406,7 @@ export default function Call() {
   return (
     <div className="min-h-screen flex flex-col bg-[#e8ecf0] font-sans text-xs">
       <div className="bg-[#1565a7] text-white flex items-center justify-between px-3 py-1.5 flex-shrink-0">
-        <div className="flex items-center gap-4"><span className="font-bold text-sm tracking-wide">VanillaSoft</span><div className="flex items-center gap-3 text-xs text-blue-100"><span>Menu</span><span>Calendar</span><span>Documents</span><span>My CRM</span></div></div>
+        <div className="flex items-center gap-4"><span className="font-bold text-sm tracking-wide">Emerge CRM</span><div className="flex items-center gap-3 text-xs text-blue-100"><span>Menu</span><span>Calendar</span><span>Documents</span><span>My CRM</span></div></div>
         <div className="text-sm font-semibold">Emerge, Inc.</div>
         <div className="flex items-center gap-3 text-xs text-blue-100"><span>Admin</span><span>Support</span><span className="text-white font-medium">{session.repName.toLowerCase().replace(" ", ".")}@emerge.com</span></div>
       </div>
@@ -461,7 +461,8 @@ export default function Call() {
                stt.isListening && !isThinking && !isSpeaking ? <><Mic className="w-4 h-4 text-red-500 animate-pulse" /><span className="text-xs font-semibold text-red-600">{stt.interimText || "Listening... speak now"}</span></> :
                isSpeaking ? <><Volume2 className="w-4 h-4 text-blue-500" /><span className="text-xs font-semibold text-blue-600">{persona.displayName.split(" ")[0]} is speaking...</span><div className="flex items-end gap-0.5 h-4 ml-1">{[1,2,3,4,5].map(i => <div key={i} className="w-1 bg-blue-500 rounded-full voice-bar" style={{height:"16px"}} />)}</div></> :
                isThinking ? <><Loader2 className="w-4 h-4 text-gray-500 animate-spin" /><span className="text-xs text-gray-600">{persona.displayName.split(" ")[0]} is thinking...</span></> :
-               <><div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" /><span className="text-xs text-green-700">Voice active — speak naturally</span></>}
+               micEnabled ? <><div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" /><span className="text-xs text-green-700">Voice active — speak naturally</span></> :
+               <><MicOff className="w-4 h-4 text-gray-400" /><span className="text-xs text-gray-500 font-semibold">Muted</span></>}
               <button onClick={() => setMicEnabled(!micEnabled)} className={`ml-2 p-1.5 rounded-full ${micEnabled ? "bg-red-100 text-red-600" : "bg-gray-100 text-gray-400"}`}>{micEnabled ? <Mic className="w-3.5 h-3.5" /> : <MicOff className="w-3.5 h-3.5" />}</button>
             </div>
 
