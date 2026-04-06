@@ -323,7 +323,7 @@ export default function Call() {
   const [isThinking, setIsThinking] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [selectedResult, setSelectedResult] = useState(""); const [notes, setNotes] = useState("");
-  const [activeTab, setActiveTab] = useState<"Call Transcript"|"Demographics"|"Script"|"Qualifiers"|"Sales Info">("Call Transcript");
+  const [activeTab, setActiveTab] = useState<"Call Transcript"|"Demographics"|"Script">("Call Transcript");
   const [endCallError, setEndCallError] = useState<string | null>(null);
   const [voiceError, setVoiceError] = useState<string | null>(null);
   const [micEnabled, setMicEnabled] = useState(false);
@@ -497,7 +497,7 @@ export default function Call() {
         {/* CENTER */}
         <div className="flex-1 flex flex-col min-w-0 bg-white border-r border-gray-300">
           <div className="flex border-b border-gray-300 bg-gray-50 flex-shrink-0">
-            {(["Call Transcript","Demographics","Script","Qualifiers","Sales Info"] as const).map(tab => (
+            {(["Call Transcript","Demographics","Script"] as const).map(tab => (
               <div key={tab} onClick={() => setActiveTab(tab)} className={`px-4 py-2 text-xs cursor-pointer border-r border-gray-300 ${activeTab === tab ? "bg-white text-[#1565a7] font-semibold border-b-2 border-b-[#1565a7]" : "text-gray-600 hover:bg-gray-100"}`}>{tab}</div>
             ))}
           </div>
@@ -524,8 +524,6 @@ export default function Call() {
               )}
             </div>
           )}
-          {activeTab === "Qualifiers" && <div className="flex-1 overflow-y-auto p-4"><div className="space-y-3">{[{q:"Pipeline coverage?",w:"Urgency"},{q:"How many field reps?",w:"Gaps"},{q:"Reps prospecting or closing?",w:"Fit"},{q:"Tried outsourced sales before?",w:"Objections"}].map((item,i) => <div key={i} className="bg-gray-50 border border-gray-200 rounded p-2.5"><p className="text-xs font-semibold text-gray-800 mb-1">Q{i+1}: "{item.q}"</p><p className="text-[11px] text-blue-700">Why: {item.w}</p></div>)}</div></div>}
-          {activeTab === "Sales Info" && <div className="flex-1 overflow-y-auto p-4"><div className="space-y-2">{["21 days to first appointment","60% lower cost than in-house","Med device trained reps","Salesforce integration","Performance guarantee"].map((pt,i) => <div key={i} className="flex items-start gap-2"><span className="text-green-600 font-bold">✓</span><p className="text-xs text-gray-700">{pt}</p></div>)}</div></div>}
 
           {activeTab === "Call Transcript" && (
           <div className="flex-1 flex flex-col overflow-hidden p-3 gap-3">
