@@ -462,7 +462,7 @@ export default function Call() {
                isSpeaking ? <><Volume2 className="w-4 h-4 text-blue-500" /><span className="text-xs font-semibold text-blue-600">{persona.displayName.split(" ")[0]} is speaking...</span><div className="flex items-end gap-0.5 h-4 ml-1">{[1,2,3,4,5].map(i => <div key={i} className="w-1 bg-blue-500 rounded-full voice-bar" style={{height:"16px"}} />)}</div></> :
                isThinking ? <><Loader2 className="w-4 h-4 text-gray-500 animate-spin" /><span className="text-xs text-gray-600">{persona.displayName.split(" ")[0]} is thinking...</span></> :
                micEnabled ? <><div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" /><span className="text-xs text-green-700">Voice active — speak naturally</span></> :
-               <><MicOff className="w-4 h-4 text-gray-400" /><span className="text-xs text-gray-500 font-semibold">Muted</span></>}
+               <><span className="text-xs text-gray-500 font-semibold">Muted</span></>}
               <button onClick={() => setMicEnabled(!micEnabled)} className={`ml-2 p-1.5 rounded-full ${micEnabled ? "bg-red-100 text-red-600" : "bg-gray-100 text-gray-400"}`}>{micEnabled ? <Mic className="w-3.5 h-3.5" /> : <MicOff className="w-3.5 h-3.5" />}</button>
             </div>
 
