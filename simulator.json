@@ -1,0 +1,700 @@
+{
+  "sessions": [
+    {
+      "id": 1,
+      "personaId": "ceo_novapulse",
+      "productId": "emerge_inside_sales",
+      "repName": "Test User",
+      "status": "active",
+      "startedAt": "2026-04-06T15:28:27.200Z",
+      "endedAt": null,
+      "transcript": "[]",
+      "scorecardJson": null
+    },
+    {
+      "id": 2,
+      "personaId": "ceo_novapulse",
+      "productId": "emerge_inside_sales",
+      "repName": "Ken Cohen",
+      "status": "active",
+      "startedAt": "2026-04-06T15:39:48.557Z",
+      "endedAt": null,
+      "transcript": "[]",
+      "scorecardJson": null
+    },
+    {
+      "id": 3,
+      "personaId": "ceo_novapulse",
+      "productId": "emerge_inside_sales",
+      "repName": "Ken Cohen",
+      "status": "active",
+      "startedAt": "2026-04-06T15:44:33.484Z",
+      "endedAt": null,
+      "transcript": "[]",
+      "scorecardJson": null
+    },
+    {
+      "id": 4,
+      "personaId": "vp_sales_vertexmed",
+      "productId": "emerge_inside_sales",
+      "repName": "Ken Cohen",
+      "status": "active",
+      "startedAt": "2026-04-06T15:55:01.327Z",
+      "endedAt": null,
+      "transcript": "[]",
+      "scorecardJson": null
+    },
+    {
+      "id": 5,
+      "personaId": "ceo_luminarx",
+      "productId": "emerge_inside_sales",
+      "repName": "Ken Cohen",
+      "status": "active",
+      "startedAt": "2026-04-06T15:56:04.350Z",
+      "endedAt": null,
+      "transcript": "[]",
+      "scorecardJson": null
+    },
+    {
+      "id": 6,
+      "personaId": "vp_sales_clearvision",
+      "productId": "emerge_inside_sales",
+      "repName": "Ken Cohen",
+      "status": "active",
+      "startedAt": "2026-04-06T16:06:16.753Z",
+      "endedAt": null,
+      "transcript": "[]",
+      "scorecardJson": null
+    },
+    {
+      "id": 7,
+      "personaId": "vp_sales_luminarx",
+      "productId": "emerge_inside_sales",
+      "repName": "Ken Cohen",
+      "status": "active",
+      "startedAt": "2026-04-06T16:11:52.316Z",
+      "endedAt": null,
+      "transcript": "[]",
+      "scorecardJson": null
+    },
+    {
+      "id": 8,
+      "personaId": "ceo_luminarx",
+      "productId": "emerge_inside_sales",
+      "repName": "Ken Cohen",
+      "status": "active",
+      "startedAt": "2026-04-06T16:13:23.074Z",
+      "endedAt": null,
+      "transcript": "[]",
+      "scorecardJson": null
+    },
+    {
+      "id": 9,
+      "personaId": "ceo_luminarx",
+      "productId": "emerge_inside_sales",
+      "repName": "Ken Cohen",
+      "status": "active",
+      "startedAt": "2026-04-06T16:14:38.376Z",
+      "endedAt": null,
+      "transcript": "[]",
+      "scorecardJson": null
+    },
+    {
+      "id": 10,
+      "personaId": "vp_sales_luminarx",
+      "productId": "emerge_inside_sales",
+      "repName": "Ken Cohen",
+      "status": "active",
+      "startedAt": "2026-04-06T16:14:56.317Z",
+      "endedAt": null,
+      "transcript": "[]",
+      "scorecardJson": null
+    },
+    {
+      "id": 11,
+      "personaId": "ceo_novapulse",
+      "productId": "emerge_inside_sales",
+      "repName": "test",
+      "status": "active",
+      "startedAt": "2026-04-06T16:16:17.560Z",
+      "endedAt": null,
+      "transcript": "[]",
+      "scorecardJson": null
+    },
+    {
+      "id": 12,
+      "personaId": "ceo_luminarx",
+      "productId": "emerge_inside_sales",
+      "repName": "Ken Cohen",
+      "status": "active",
+      "startedAt": "2026-04-06T16:16:37.081Z",
+      "endedAt": null,
+      "transcript": "[]",
+      "scorecardJson": null
+    },
+    {
+      "id": 13,
+      "personaId": "vp_sales_luminarx",
+      "productId": "emerge_inside_sales",
+      "repName": "Ken Cohen",
+      "status": "active",
+      "startedAt": "2026-04-06T16:22:52.417Z",
+      "endedAt": null,
+      "transcript": "[]",
+      "scorecardJson": null
+    },
+    {
+      "id": 14,
+      "personaId": "vp_sales_luminarx",
+      "productId": "emerge_inside_sales",
+      "repName": "Ken Cohen",
+      "status": "active",
+      "startedAt": "2026-04-06T16:24:24.694Z",
+      "endedAt": null,
+      "transcript": "[]",
+      "scorecardJson": null
+    },
+    {
+      "id": 15,
+      "personaId": "vp_sales_luminarx",
+      "productId": "emerge_inside_sales",
+      "repName": "Ken Cohen",
+      "status": "active",
+      "startedAt": "2026-04-06T16:27:03.166Z",
+      "endedAt": null,
+      "transcript": "[]",
+      "scorecardJson": null
+    },
+    {
+      "id": 16,
+      "personaId": "ceo_novapulse",
+      "productId": "emerge_inside_sales",
+      "repName": "Ken Cohen",
+      "status": "active",
+      "startedAt": "2026-04-06T16:32:11.916Z",
+      "endedAt": null,
+      "transcript": "[{\"role\":\"rep\",\"content\":\"test\"},{\"role\":\"prospect\",\"content\":\"Who gave you my number and what exactly are you selling? I've got a meeting in 10 minutes and I'm trying to prep, so make it quick.\"}]",
+      "scorecardJson": null
+    },
+    {
+      "id": 17,
+      "personaId": "ceo_novapulse",
+      "productId": "emerge_inside_sales",
+      "repName": "Ken Cohen",
+      "status": "active",
+      "startedAt": "2026-04-06T16:38:29.232Z",
+      "endedAt": null,
+      "transcript": "[{\"role\":\"rep\",\"content\":\"hello\"},{\"role\":\"prospect\",\"content\":\"Who gave you my number and what exactly are you selling? I've got a meeting in 10 minutes and I need to make this quick.\"}]",
+      "scorecardJson": null
+    },
+    {
+      "id": 18,
+      "personaId": "ceo_luminarx",
+      "productId": "emerge_inside_sales",
+      "repName": "Ken Cohen",
+      "status": "active",
+      "startedAt": "2026-04-06T16:40:57.099Z",
+      "endedAt": null,
+      "transcript": "[{\"role\":\"rep\",\"content\":\"can you hear me\"},{\"role\":\"prospect\",\"content\":\"This is Christine, make it quick. I've got a lot on my plate today. What's this call about?\"},{\"role\":\"rep\",\"content\":\"hi Christine\"},{\"role\":\"prospect\",\"content\":\"Let's get straight to it. I don't have a lot of time to waste. What can you do for LuminarX Surgical that's going to drive revenue and get us to our Series D milestone?\"},{\"role\":\"rep\",\"content\":\"can you make an assumption Mary that I don't think exactly\"},{\"role\":\"prospect\",\"content\":\"I don't have time for assumptions, let's cut to the chase. Are you calling about pipeline generation or something else? We need qualified meetings with OR Directors, can you help us with that?\"},{\"role\":\"rep\",\"content\":\"Christina I believe we can\"},{\"role\":\"prospect\",\"content\":\"You think you can help us with pipeline generation, specifically getting qualified meetings with OR Directors. That's great, but I've heard that before. How fast can you get me those meetings, and what's your track record with surgical device sales?\"},{\"role\":\"rep\",\"content\":\"we've worked with companies like on like a GE Healthcare in Siemens healthineers so I believe we have a great track record\"},{\"role\":\"prospect\",\"content\":\"Impressive names, but I need to know how that translates to results. How fast can you get me qualified meetings with OR Directors, and what kind of volume are we talking about? I need to see traction in the next 6-12 months to get to our Series D, so I need to know you can deliver quickly.\"},{\"role\":\"rep\",\"content\":\"extremely fast\"},{\"role\":\"prospect\",\"content\":\"Fast is good, but I need specifics. Can you get me qualified meetings with OR Directors in 30-60 days, and what's the typical conversion rate on those meetings? Every dollar I spend has to map to pipeline, so I need to know what I'm getting for my investment.\"}]",
+      "scorecardJson": null
+    },
+    {
+      "id": 19,
+      "personaId": "ceo_novapulse",
+      "productId": "emerge_inside_sales",
+      "repName": "Ken Cohen",
+      "status": "active",
+      "startedAt": "2026-04-06T16:43:28.864Z",
+      "endedAt": null,
+      "transcript": "[{\"role\":\"rep\",\"content\":\"Mike's burgundy\"},{\"role\":\"prospect\",\"content\":\"Who is this and what's this regarding? I don't have time for vague conversations, I have a meeting in 10 minutes. Can you please state your name and the purpose of your call?\"},{\"role\":\"rep\",\"content\":\"okay\"},{\"role\":\"prospect\",\"content\":\"\\\"Okay\\\" isn't going to cut it. Who gave you my number and what exactly are you selling? I'm busy and I need you to be clear and direct about why you're calling.\"}]",
+      "scorecardJson": null
+    },
+    {
+      "id": 20,
+      "personaId": "ceo_novapulse",
+      "productId": "emerge_inside_sales",
+      "repName": "Ken Cohen",
+      "status": "active",
+      "startedAt": "2026-04-06T16:43:52.674Z",
+      "endedAt": null,
+      "transcript": "[{\"role\":\"rep\",\"content\":\"hello David this is Ken Cohen calling on behalf of Mike's for Duty over at emerge sales\"},{\"role\":\"prospect\",\"content\":\"Ken, I wasn't expecting a call from Mike's for Duty or Emerge Sales - can you tell me who gave you my number and what exactly you're selling? I've got a meeting in 10 minutes and I want to make sure I understand what this is about before we get started.\"},{\"role\":\"rep\",\"content\":\"hi David\"},{\"role\":\"prospect\",\"content\":\"Ken, we already established that. Now, can you please get to the point and tell me what Emerge Sales is calling about? I don't have a lot of time to waste on small talk, so let's get down to business. What are you selling?\"}]",
+      "scorecardJson": null
+    },
+    {
+      "id": 21,
+      "personaId": "ceo_vertexmed",
+      "productId": "emerge_inside_sales",
+      "repName": "Ken Cohen",
+      "status": "active",
+      "startedAt": "2026-04-06T16:47:03.476Z",
+      "endedAt": null,
+      "transcript": "[{\"role\":\"rep\",\"content\":\"hey Robert how are you doing today\"},{\"role\":\"prospect\",\"content\":\"I'm doing well, thank you. Who is this and what's this call regarding? I wasn't expecting a call, so I'm a bit curious about the purpose of your call. Can you please introduce yourself and tell me what brings you to Vertex MedTech today?\"}]",
+      "scorecardJson": null
+    },
+    {
+      "id": 22,
+      "personaId": "ceo_vertexmed",
+      "productId": "emerge_inside_sales",
+      "repName": "Ken Cohen",
+      "status": "active",
+      "startedAt": "2026-04-06T16:47:55.785Z",
+      "endedAt": null,
+      "transcript": "[{\"role\":\"rep\",\"content\":\"hello John I'm Ken Cohen and I'm going home\"},{\"role\":\"prospect\",\"content\":\"Ken Cohen, going home, that doesn't give me much to go on. Who is this, and what's the purpose of your call? I've got a lot on my plate, so if you could be more specific, I'd appreciate it.\"}]",
+      "scorecardJson": null
+    },
+    {
+      "id": 23,
+      "personaId": "ceo_vertexmed",
+      "productId": "emerge_inside_sales",
+      "repName": "Ken Cohen",
+      "status": "active",
+      "startedAt": "2026-04-06T16:48:54.978Z",
+      "endedAt": null,
+      "transcript": "[{\"role\":\"rep\",\"content\":\"hello John and this is Ken Cohen calling on behalf of Mike's birthday at emerge sales for calling today to evaluate what's your pipeline prediction looking like for the coming months\"},{\"role\":\"prospect\",\"content\":\"Who is this, Ken Cohen? I don't recall scheduling a call with you, and I'm not sure what Mike's birthday at Emerge Sales has to do with Vertex MedTech. Can you please clarify what this call is regarding and what your role is at Emerge Sales?\"}]",
+      "scorecardJson": null
+    },
+    {
+      "id": 24,
+      "personaId": "ceo_vertexmed",
+      "productId": "emerge_inside_sales",
+      "repName": "Ken Cohen",
+      "status": "active",
+      "startedAt": "2026-04-06T16:52:45.088Z",
+      "endedAt": null,
+      "transcript": "[]",
+      "scorecardJson": null
+    },
+    {
+      "id": 25,
+      "personaId": "ceo_vertexmed",
+      "productId": "emerge_inside_sales",
+      "repName": "Ken Cohen",
+      "status": "active",
+      "startedAt": "2026-04-06T16:55:52.513Z",
+      "endedAt": null,
+      "transcript": "[]",
+      "scorecardJson": null
+    },
+    {
+      "id": 26,
+      "personaId": "ceo_vertexmed",
+      "productId": "emerge_inside_sales",
+      "repName": "Ken Cohen",
+      "status": "active",
+      "startedAt": "2026-04-06T16:56:51.980Z",
+      "endedAt": null,
+      "transcript": "[]",
+      "scorecardJson": null
+    },
+    {
+      "id": 27,
+      "personaId": "ceo_vertexmed",
+      "productId": "emerge_inside_sales",
+      "repName": "Ken Cohen",
+      "status": "active",
+      "startedAt": "2026-04-06T16:59:08.202Z",
+      "endedAt": null,
+      "transcript": "[]",
+      "scorecardJson": null
+    },
+    {
+      "id": 28,
+      "personaId": "ceo_vertexmed",
+      "productId": "emerge_inside_sales",
+      "repName": "Ken Cohen",
+      "status": "completed",
+      "startedAt": "2026-04-06T17:00:31.008Z",
+      "endedAt": "2026-04-06T17:01:47.744Z",
+      "transcript": "[{\"role\":\"rep\",\"content\":\"Hello, John.\"},{\"role\":\"prospect\",\"content\":\"John Pork. Who is this and what's this regarding?\"},{\"role\":\"rep\",\"content\":\"Ken Cohen with Mike Spurdutti over at Emerge Sales.\"},{\"role\":\"prospect\",\"content\":\"I've got about five minutes. What specifically brought you to me, Ken? What does Emerge Sales do that's relevant to Vertex MedTech?\"},{\"role\":\"rep\",\"content\":\"Emerge sales is in the pipeline generation business. We wanted to talk to you today about your pipeline prospects for the rest of 2026 and ask if maybe you'd be interested in a consultation with us.\"},{\"role\":\"prospect\",\"content\":\"Pipeline generation, that's a specific area of interest for us, given our growth targets. Have you worked with orthopedic implant companies before, Ken? That's a very specific sales motion, and I'd like to understand if you have relevant experience in our space.\"},{\"role\":\"rep\",\"content\":\"We have worked with orthopedic companies before, John.\"},{\"role\":\"prospect\",\"content\":\"I'd like to know more about that experience. Who else at our size and revenue stage are you working with in ortho? Can you give me some specific examples or references that I could reach out to?\"}]",
+      "scorecardJson": "{\"dimensions\":[{\"name\":\"Opening & Pattern Interrupt\",\"score\":6,\"feedback\":\"The rep started with a generic introduction and didn't create a strong pattern interrupt. To improve, they could have started with a specific reference to Vertex MedTech's growth targets or a recent news article about the company, such as 'I saw that Vertex MedTech is expanding its orthopedic implant line and I wanted to reach out to discuss how Emerge Sales can support that growth.'\"},{\"name\":\"Rapport & Trust Building\",\"score\":4,\"feedback\":\"The rep didn't demonstrate genuine curiosity about John's commercial challenges. They could have asked more questions like 'What are your top priorities for the rest of 2026?' or 'How do you see the orthopedic sales cycle evolving in the next quarter?' to build rapport and trust.\"},{\"name\":\"Discovery & Questioning\",\"score\":3,\"feedback\":\"The rep didn't ask open-ended questions to uncover real pain points. They could have asked 'What are the biggest challenges you're facing in terms of pipeline generation?' or 'How do you currently measure the effectiveness of your sales team?' to have a more meaningful conversation.\"},{\"name\":\"Value Proposition Delivery\",\"score\":5,\"feedback\":\"The rep's value proposition was somewhat clear, but it wasn't specifically tailored to John's priorities. They could have emphasized how Emerge Sales can help improve pipeline coverage ratio and EBITDA margin, which are critical to John's success.\"},{\"name\":\"Objection Handling\",\"score\":7,\"feedback\":\"The rep handled John's objection about relevant experience in the orthopedic space well by providing a general response. However, they could have provided more specific examples or references to strengthen their response, such as 'We've worked with several orthopedic companies, including XYZ Corporation, and have helped them increase their pipeline generation by 25%.'\"},{\"name\":\"Medical Device Knowledge\",\"score\":6,\"feedback\":\"The rep demonstrated some understanding of the medical device sales cycle, but could have spoken more specifically about the orthopedic implant space and the challenges that come with it, such as surgeon preference and hospital value analysis.\"},{\"name\":\"Call Control & Momentum\",\"score\":5,\"feedback\":\"The rep let John control the conversation and didn't recover momentum after John asked for references. They could have politely interrupted and said 'I'd be happy to provide references, but can I also ask a few more questions to understand your current sales process?' to regain control of the conversation.\"},{\"name\":\"Close / Next Step\",\"score\":2,\"feedback\":\"The rep didn't earn or ask for a specific next step. They could have said 'Based on our conversation, I think Emerge Sales could really help Vertex MedTech improve its pipeline generation. Would you be open to a follow-up conversation next week to discuss further?' to establish a clear next step.\"}],\"overallScore\":48,\"strengths\":[\"The rep handled John's objection about relevant experience in the orthopedic space well by providing a general response.\",\"The rep demonstrated some understanding of the medical device sales cycle.\"],\"improvements\":[\"The rep needs to improve their opening and pattern interrupt to grab the prospect's attention.\",\"The rep should ask more open-ended questions to uncover real pain points and build rapport with the prospect.\",\"The rep needs to provide more specific examples and references to strengthen their value proposition and handle objections more effectively.\"],\"verdict\":\"Needs Work\",\"coachingSummary\":\"The rep needs to work on creating a stronger opening, building rapport, and providing more specific examples to support their value proposition. With practice and coaching, they can improve their skills and have more effective conversations with prospects.\"}"
+    }
+  ],
+  "messages": [
+    {
+      "id": 1,
+      "sessionId": 2,
+      "role": "rep",
+      "content": "hello",
+      "timestamp": "2026-04-06T15:40:14.383Z",
+      "tone": null
+    },
+    {
+      "id": 2,
+      "sessionId": 2,
+      "role": "rep",
+      "content": "hello",
+      "timestamp": "2026-04-06T15:42:35.218Z",
+      "tone": null
+    },
+    {
+      "id": 3,
+      "sessionId": 3,
+      "role": "rep",
+      "content": "test",
+      "timestamp": "2026-04-06T15:44:39.481Z",
+      "tone": null
+    },
+    {
+      "id": 4,
+      "sessionId": 8,
+      "role": "rep",
+      "content": "hello",
+      "timestamp": "2026-04-06T16:13:34.743Z",
+      "tone": null
+    },
+    {
+      "id": 5,
+      "sessionId": 9,
+      "role": "rep",
+      "content": "hello",
+      "timestamp": "2026-04-06T16:14:43.039Z",
+      "tone": null
+    },
+    {
+      "id": 6,
+      "sessionId": 10,
+      "role": "rep",
+      "content": "hello",
+      "timestamp": "2026-04-06T16:15:02.861Z",
+      "tone": null
+    },
+    {
+      "id": 7,
+      "sessionId": 12,
+      "role": "rep",
+      "content": "hello",
+      "timestamp": "2026-04-06T16:16:40.336Z",
+      "tone": null
+    },
+    {
+      "id": 8,
+      "sessionId": 13,
+      "role": "rep",
+      "content": "hello this is a test",
+      "timestamp": "2026-04-06T16:22:57.140Z",
+      "tone": null
+    },
+    {
+      "id": 9,
+      "sessionId": 14,
+      "role": "rep",
+      "content": "hello this is a test",
+      "timestamp": "2026-04-06T16:24:29.172Z",
+      "tone": null
+    },
+    {
+      "id": 10,
+      "sessionId": 15,
+      "role": "rep",
+      "content": "hello Jason can you hear me",
+      "timestamp": "2026-04-06T16:27:09.061Z",
+      "tone": null
+    },
+    {
+      "id": 11,
+      "sessionId": 16,
+      "role": "rep",
+      "content": "test",
+      "timestamp": "2026-04-06T16:32:35.383Z",
+      "tone": null
+    },
+    {
+      "id": 12,
+      "sessionId": 16,
+      "role": "prospect",
+      "content": "Who gave you my number and what exactly are you selling? I've got a meeting in 10 minutes and I'm trying to prep, so make it quick.",
+      "timestamp": "2026-04-06T16:32:36.340Z",
+      "tone": null
+    },
+    {
+      "id": 13,
+      "sessionId": 17,
+      "role": "rep",
+      "content": "hello",
+      "timestamp": "2026-04-06T16:38:48.266Z",
+      "tone": null
+    },
+    {
+      "id": 14,
+      "sessionId": 17,
+      "role": "prospect",
+      "content": "Who gave you my number and what exactly are you selling? I've got a meeting in 10 minutes and I need to make this quick.",
+      "timestamp": "2026-04-06T16:38:48.860Z",
+      "tone": null
+    },
+    {
+      "id": 15,
+      "sessionId": 18,
+      "role": "rep",
+      "content": "can you hear me",
+      "timestamp": "2026-04-06T16:40:59.950Z",
+      "tone": null
+    },
+    {
+      "id": 16,
+      "sessionId": 18,
+      "role": "prospect",
+      "content": "This is Christine, make it quick. I've got a lot on my plate today. What's this call about?",
+      "timestamp": "2026-04-06T16:41:00.436Z",
+      "tone": null
+    },
+    {
+      "id": 17,
+      "sessionId": 18,
+      "role": "rep",
+      "content": "hi Christine",
+      "timestamp": "2026-04-06T16:41:09.721Z",
+      "tone": null
+    },
+    {
+      "id": 18,
+      "sessionId": 18,
+      "role": "prospect",
+      "content": "Let's get straight to it. I don't have a lot of time to waste. What can you do for LuminarX Surgical that's going to drive revenue and get us to our Series D milestone?",
+      "timestamp": "2026-04-06T16:41:10.398Z",
+      "tone": null
+    },
+    {
+      "id": 19,
+      "sessionId": 18,
+      "role": "rep",
+      "content": "can you make an assumption Mary that I don't think exactly",
+      "timestamp": "2026-04-06T16:41:23.413Z",
+      "tone": null
+    },
+    {
+      "id": 20,
+      "sessionId": 18,
+      "role": "prospect",
+      "content": "I don't have time for assumptions, let's cut to the chase. Are you calling about pipeline generation or something else? We need qualified meetings with OR Directors, can you help us with that?",
+      "timestamp": "2026-04-06T16:41:23.914Z",
+      "tone": null
+    },
+    {
+      "id": 21,
+      "sessionId": 18,
+      "role": "rep",
+      "content": "Christina I believe we can",
+      "timestamp": "2026-04-06T16:41:37.000Z",
+      "tone": null
+    },
+    {
+      "id": 22,
+      "sessionId": 18,
+      "role": "prospect",
+      "content": "You think you can help us with pipeline generation, specifically getting qualified meetings with OR Directors. That's great, but I've heard that before. How fast can you get me those meetings, and what's your track record with surgical device sales?",
+      "timestamp": "2026-04-06T16:41:37.765Z",
+      "tone": null
+    },
+    {
+      "id": 23,
+      "sessionId": 18,
+      "role": "rep",
+      "content": "we've worked with companies like on like a GE Healthcare in Siemens healthineers so I believe we have a great track record",
+      "timestamp": "2026-04-06T16:42:03.002Z",
+      "tone": null
+    },
+    {
+      "id": 24,
+      "sessionId": 18,
+      "role": "prospect",
+      "content": "Impressive names, but I need to know how that translates to results. How fast can you get me qualified meetings with OR Directors, and what kind of volume are we talking about? I need to see traction in the next 6-12 months to get to our Series D, so I need to know you can deliver quickly.",
+      "timestamp": "2026-04-06T16:42:04.013Z",
+      "tone": null
+    },
+    {
+      "id": 25,
+      "sessionId": 18,
+      "role": "rep",
+      "content": "extremely fast",
+      "timestamp": "2026-04-06T16:42:22.421Z",
+      "tone": null
+    },
+    {
+      "id": 26,
+      "sessionId": 18,
+      "role": "prospect",
+      "content": "Fast is good, but I need specifics. Can you get me qualified meetings with OR Directors in 30-60 days, and what's the typical conversion rate on those meetings? Every dollar I spend has to map to pipeline, so I need to know what I'm getting for my investment.",
+      "timestamp": "2026-04-06T16:42:23.132Z",
+      "tone": null
+    },
+    {
+      "id": 27,
+      "sessionId": 19,
+      "role": "rep",
+      "content": "Mike's burgundy",
+      "timestamp": "2026-04-06T16:43:37.331Z",
+      "tone": null
+    },
+    {
+      "id": 28,
+      "sessionId": 19,
+      "role": "prospect",
+      "content": "Who is this and what's this regarding? I don't have time for vague conversations, I have a meeting in 10 minutes. Can you please state your name and the purpose of your call?",
+      "timestamp": "2026-04-06T16:43:38.707Z",
+      "tone": null
+    },
+    {
+      "id": 29,
+      "sessionId": 19,
+      "role": "rep",
+      "content": "okay",
+      "timestamp": "2026-04-06T16:43:41.106Z",
+      "tone": null
+    },
+    {
+      "id": 30,
+      "sessionId": 19,
+      "role": "prospect",
+      "content": "\"Okay\" isn't going to cut it. Who gave you my number and what exactly are you selling? I'm busy and I need you to be clear and direct about why you're calling.",
+      "timestamp": "2026-04-06T16:43:41.880Z",
+      "tone": null
+    },
+    {
+      "id": 31,
+      "sessionId": 20,
+      "role": "rep",
+      "content": "hello David this is Ken Cohen calling on behalf of Mike's for Duty over at emerge sales",
+      "timestamp": "2026-04-06T16:44:00.662Z",
+      "tone": null
+    },
+    {
+      "id": 32,
+      "sessionId": 20,
+      "role": "prospect",
+      "content": "Ken, I wasn't expecting a call from Mike's for Duty or Emerge Sales - can you tell me who gave you my number and what exactly you're selling? I've got a meeting in 10 minutes and I want to make sure I understand what this is about before we get started.",
+      "timestamp": "2026-04-06T16:44:01.494Z",
+      "tone": null
+    },
+    {
+      "id": 33,
+      "sessionId": 20,
+      "role": "rep",
+      "content": "hi David",
+      "timestamp": "2026-04-06T16:44:28.841Z",
+      "tone": null
+    },
+    {
+      "id": 34,
+      "sessionId": 20,
+      "role": "prospect",
+      "content": "Ken, we already established that. Now, can you please get to the point and tell me what Emerge Sales is calling about? I don't have a lot of time to waste on small talk, so let's get down to business. What are you selling?",
+      "timestamp": "2026-04-06T16:44:29.520Z",
+      "tone": null
+    },
+    {
+      "id": 35,
+      "sessionId": 21,
+      "role": "rep",
+      "content": "hey Robert how are you doing today",
+      "timestamp": "2026-04-06T16:47:06.911Z",
+      "tone": null
+    },
+    {
+      "id": 36,
+      "sessionId": 21,
+      "role": "prospect",
+      "content": "I'm doing well, thank you. Who is this and what's this call regarding? I wasn't expecting a call, so I'm a bit curious about the purpose of your call. Can you please introduce yourself and tell me what brings you to Vertex MedTech today?",
+      "timestamp": "2026-04-06T16:47:07.918Z",
+      "tone": null
+    },
+    {
+      "id": 37,
+      "sessionId": 22,
+      "role": "rep",
+      "content": "hello John I'm Ken Cohen and I'm going home",
+      "timestamp": "2026-04-06T16:48:09.915Z",
+      "tone": null
+    },
+    {
+      "id": 38,
+      "sessionId": 22,
+      "role": "prospect",
+      "content": "Ken Cohen, going home, that doesn't give me much to go on. Who is this, and what's the purpose of your call? I've got a lot on my plate, so if you could be more specific, I'd appreciate it.",
+      "timestamp": "2026-04-06T16:48:10.397Z",
+      "tone": null
+    },
+    {
+      "id": 39,
+      "sessionId": 23,
+      "role": "rep",
+      "content": "hello John and this is Ken Cohen calling on behalf of Mike's birthday at emerge sales for calling today to evaluate what's your pipeline prediction looking like for the coming months",
+      "timestamp": "2026-04-06T16:49:09.074Z",
+      "tone": null
+    },
+    {
+      "id": 40,
+      "sessionId": 23,
+      "role": "prospect",
+      "content": "Who is this, Ken Cohen? I don't recall scheduling a call with you, and I'm not sure what Mike's birthday at Emerge Sales has to do with Vertex MedTech. Can you please clarify what this call is regarding and what your role is at Emerge Sales?",
+      "timestamp": "2026-04-06T16:49:09.833Z",
+      "tone": null
+    },
+    {
+      "id": 41,
+      "sessionId": 28,
+      "role": "rep",
+      "content": "Hello, John.",
+      "timestamp": "2026-04-06T17:00:34.553Z",
+      "tone": null
+    },
+    {
+      "id": 42,
+      "sessionId": 28,
+      "role": "prospect",
+      "content": "John Pork. Who is this and what's this regarding?",
+      "timestamp": "2026-04-06T17:00:34.895Z",
+      "tone": null
+    },
+    {
+      "id": 43,
+      "sessionId": 28,
+      "role": "rep",
+      "content": "Ken Cohen with Mike Spurdutti over at Emerge Sales.",
+      "timestamp": "2026-04-06T17:00:45.379Z",
+      "tone": null
+    },
+    {
+      "id": 44,
+      "sessionId": 28,
+      "role": "prospect",
+      "content": "I've got about five minutes. What specifically brought you to me, Ken? What does Emerge Sales do that's relevant to Vertex MedTech?",
+      "timestamp": "2026-04-06T17:00:45.766Z",
+      "tone": null
+    },
+    {
+      "id": 45,
+      "sessionId": 28,
+      "role": "rep",
+      "content": "Emerge sales is in the pipeline generation business. We wanted to talk to you today about your pipeline prospects for the rest of 2026 and ask if maybe you'd be interested in a consultation with us.",
+      "timestamp": "2026-04-06T17:01:11.999Z",
+      "tone": null
+    },
+    {
+      "id": 46,
+      "sessionId": 28,
+      "role": "prospect",
+      "content": "Pipeline generation, that's a specific area of interest for us, given our growth targets. Have you worked with orthopedic implant companies before, Ken? That's a very specific sales motion, and I'd like to understand if you have relevant experience in our space.",
+      "timestamp": "2026-04-06T17:01:12.676Z",
+      "tone": null
+    },
+    {
+      "id": 47,
+      "sessionId": 28,
+      "role": "rep",
+      "content": "We have worked with orthopedic companies before, John.",
+      "timestamp": "2026-04-06T17:01:36.492Z",
+      "tone": null
+    },
+    {
+      "id": 48,
+      "sessionId": 28,
+      "role": "prospect",
+      "content": "I'd like to know more about that experience. Who else at our size and revenue stage are you working with in ortho? Can you give me some specific examples or references that I could reach out to?",
+      "timestamp": "2026-04-06T17:01:36.820Z",
+      "tone": null
+    }
+  ],
+  "nextSessionId": 29,
+  "nextMessageId": 49
+}
