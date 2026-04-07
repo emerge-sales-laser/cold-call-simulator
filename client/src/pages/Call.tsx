@@ -102,127 +102,108 @@ function IntroPopup({ onStart }: { onStart: (r: IntroResult) => void }) {
 
   const renderJobButton = (j: typeof JOB_TITLES[number]) => (
     <button key={j.id} onClick={() => setSelectedJob(j.id)}
-      className={`text-left p-2.5 rounded-lg border-2 transition-all text-xs ${selectedJob === j.id ? "border-[#1565a7] bg-blue-50 ring-2 ring-blue-200" : "border-gray-200 hover:border-gray-300"}`}>
-      <div className="font-semibold text-gray-900 text-sm">{j.label}</div>
-      <div className="text-[10px] text-gray-500 mt-0.5">{j.fullTitle}</div>
-      <div className="text-[10px] text-gray-400 mt-1 leading-tight">{j.description}</div>
+      className={`text-left p-2 rounded-md border-2 transition-all text-xs ${selectedJob === j.id ? "border-[#1565a7] bg-blue-50 ring-1 ring-blue-200" : "border-gray-200 hover:border-gray-300"}`}>
+      <div className="font-semibold text-gray-900 text-xs">{j.label}</div>
+      <div className="text-[9px] text-gray-500 leading-tight">{j.fullTitle}</div>
     </button>
   );
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center p-4">
-      <div className="bg-white rounded-xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
-        <div className="bg-[#1565a7] text-white px-6 py-4 rounded-t-xl">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-lg bg-white/20 flex items-center justify-center"><Phone className="w-5 h-5" /></div>
-            <div><h1 className="font-bold text-lg">MedDevice Cold Call Simulator</h1><p className="text-blue-200 text-xs">by Emerge — Voice-Powered AI Training</p></div>
+    <div className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center p-2">
+      <div className="bg-white rounded-lg shadow-2xl w-full max-w-xl max-h-[96vh] overflow-y-auto">
+        <div className="bg-[#1565a7] text-white px-4 py-2.5 rounded-t-lg">
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center"><Phone className="w-4 h-4" /></div>
+            <div><h1 className="font-bold text-sm">MedDevice Cold Call Simulator</h1><p className="text-blue-200 text-[10px]">by Emerge — Voice-Powered AI Training</p></div>
           </div>
         </div>
-        <div className="p-6 space-y-5">
+        <div className="px-4 py-3 space-y-3">
           <div>
-            <label className="text-sm font-semibold text-gray-700 block mb-1.5">Groq API Key</label>
+            <label className="text-xs font-semibold text-gray-700 block mb-1">Groq API Key</label>
             <input type="password" value={apiKey} onChange={(e) => setApiKey(e.target.value)} placeholder="gsk_..."
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1565a7]" />
-            <p className="text-xs text-gray-400 mt-1">Free — no credit card needed. Get yours at <a href="https://console.groq.com/keys" target="_blank" rel="noopener" className="text-blue-600 underline">console.groq.com/keys</a></p>
+              className="w-full px-2 py-1.5 border border-gray-300 rounded text-xs focus:outline-none focus:ring-1 focus:ring-[#1565a7]" />
+            <p className="text-[10px] text-gray-400 mt-0.5">Free at <a href="https://console.groq.com/keys" target="_blank" rel="noopener" className="text-blue-600 underline">console.groq.com/keys</a></p>
           </div>
 
           <div>
-            <label className="text-sm font-semibold text-gray-700 block mb-2">Who are you calling?</label>
+            <label className="text-xs font-semibold text-gray-700 block mb-1">Who are you calling?</label>
 
-            <div className="mb-3">
-              <p className="text-xs font-semibold uppercase tracking-wide text-orange-500 mb-1.5">Hot Right Now</p>
-              <div className="grid grid-cols-2 gap-2">
-                {hot.map(renderJobButton)}
-              </div>
+            <p className="text-[10px] font-semibold uppercase tracking-wide text-orange-500 mb-1">Hot Right Now</p>
+            <div className="grid grid-cols-2 gap-1.5 mb-2">
+              {hot.map(renderJobButton)}
             </div>
 
-            <p className="text-xs font-semibold uppercase tracking-wide text-gray-400 mb-1.5">More Positions</p>
-            <div className="grid grid-cols-2 gap-2">
+            <p className="text-[10px] font-semibold uppercase tracking-wide text-gray-400 mb-1">More Positions</p>
+            <div className="grid grid-cols-4 gap-1.5">
               {others.map(renderJobButton)}
             </div>
           </div>
 
           {/* Configuration dropdown */}
-          <div className="border border-gray-200 rounded-lg">
+          <div className="border border-gray-200 rounded">
             <button type="button" onClick={() => setShowConfig(s => !s)}
-              className="w-full flex items-center justify-between px-3 py-2 text-sm font-semibold text-gray-700">
+              className="w-full flex items-center justify-between px-2 py-1.5 text-xs font-semibold text-gray-700">
               <span>Configuration</span>
-              <ChevronDown className={`w-4 h-4 transition-transform ${showConfig ? "rotate-180" : ""}`} />
+              <ChevronDown className={`w-3.5 h-3.5 transition-transform ${showConfig ? "rotate-180" : ""}`} />
             </button>
             {showConfig && (
-              <div className="px-3 pb-3 space-y-3 border-t border-gray-200 pt-3">
-                <div>
-                  <label className="text-xs font-semibold text-gray-600 block mb-1">Scenario Preset</label>
-                  <select value={scenarioId} onChange={e => setScenarioId(e.target.value)}
-                    className="w-full px-2 py-1.5 text-xs border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-[#1565a7]">
-                    {SCENARIOS.map(s => <option key={s.id} value={s.id}>{s.label}</option>)}
-                  </select>
-                  <p className="text-[10px] text-gray-400 mt-1">{SCENARIOS.find(s => s.id === scenarioId)?.description}</p>
-                </div>
-
-                {scenarioId === "custom" && (
+              <div className="px-2 pb-2 space-y-2 border-t border-gray-200 pt-2">
+                <div className="flex gap-2 items-end">
+                  <div className="flex-1">
+                    <label className="text-[10px] font-semibold text-gray-600 block">Scenario Preset</label>
+                    <select value={scenarioId} onChange={e => setScenarioId(e.target.value)}
+                      className="w-full px-2 py-1 text-xs border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-[#1565a7]">
+                      {SCENARIOS.map(s => <option key={s.id} value={s.id}>{s.label}</option>)}
+                    </select>
+                  </div>
                   <div>
-                    <label className="text-xs font-semibold text-gray-600 block mb-1">Custom Prompt</label>
-                    <textarea value={customPrompt} onChange={e => setCustomPrompt(e.target.value)}
-                      placeholder="Describe how the prospect should behave..."
-                      rows={4}
-                      className="w-full px-2 py-1.5 text-xs border border-gray-300 rounded font-mono focus:outline-none focus:ring-1 focus:ring-[#1565a7]" />
-                  </div>
-                )}
-
-                <div>
-                  <label className="text-xs font-semibold text-gray-600 block mb-1">Gender</label>
-                  <div className="flex gap-2">
-                    {(["male","female"] as Gender[]).map(g => (
-                      <button key={g} onClick={() => setGender(g)}
-                        className={`flex-1 px-3 py-1.5 text-xs rounded border-2 capitalize ${gender === g ? "border-[#1565a7] bg-blue-50 text-[#1565a7] font-semibold" : "border-gray-200 text-gray-600"}`}>
-                        {g}
-                      </button>
-                    ))}
+                    <label className="text-[10px] font-semibold text-gray-600 block">Gender</label>
+                    <div className="flex gap-1">
+                      {(["male","female"] as Gender[]).map(g => (
+                        <button key={g} onClick={() => setGender(g)}
+                          className={`px-2 py-1 text-[10px] rounded border-2 capitalize ${gender === g ? "border-[#1565a7] bg-blue-50 text-[#1565a7] font-semibold" : "border-gray-200 text-gray-600"}`}>
+                          {g}
+                        </button>
+                      ))}
+                    </div>
                   </div>
                 </div>
+                {scenarioId === "custom" && (
+                  <textarea value={customPrompt} onChange={e => setCustomPrompt(e.target.value)}
+                    placeholder="Describe how the prospect should behave..."
+                    rows={3}
+                    className="w-full px-2 py-1 text-xs border border-gray-300 rounded font-mono focus:outline-none focus:ring-1 focus:ring-[#1565a7]" />
+                )}
               </div>
             )}
           </div>
 
           {/* Script Upload */}
           <div>
-            <label className="text-sm font-semibold text-gray-700 block mb-1.5">Call Script (optional)</label>
+            <label className="text-xs font-semibold text-gray-700 block mb-1">Call Script (optional)</label>
             <input ref={fileInputRef} type="file" accept={getAcceptedFileTypes()} onChange={handleFileUpload} className="hidden" />
             {script ? (
-              <div className="border border-green-300 bg-green-50 rounded-lg p-3">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <FileText className="w-4 h-4 text-green-600" />
-                    <span className="text-xs font-semibold text-green-800">{script.fileName}</span>
-                  </div>
-                  <button onClick={() => setScript(null)} className="text-gray-400 hover:text-red-500"><X className="w-4 h-4" /></button>
+              <div className="border border-green-300 bg-green-50 rounded p-2 flex items-center justify-between">
+                <div className="flex items-center gap-2 min-w-0">
+                  <FileText className="w-3.5 h-3.5 text-green-600 flex-shrink-0" />
+                  <span className="text-[11px] font-semibold text-green-800 truncate">{script.fileName}</span>
                 </div>
-                <p className="text-[11px] text-green-700 mt-1">File embedded — will render in the Script tab during the call.</p>
+                <button onClick={() => setScript(null)} className="text-gray-400 hover:text-red-500"><X className="w-3.5 h-3.5" /></button>
               </div>
             ) : (
               <button onClick={() => fileInputRef.current?.click()} disabled={scriptLoading}
-                className="w-full border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:border-[#1565a7] hover:bg-blue-50 transition-all">
+                className="w-full border-2 border-dashed border-gray-300 rounded p-2 text-center hover:border-[#1565a7] hover:bg-blue-50 transition-all flex items-center justify-center gap-2">
                 {scriptLoading ? (
-                  <><Loader2 className="w-5 h-5 text-gray-400 mx-auto animate-spin mb-1" /><p className="text-xs text-gray-500">Parsing file...</p></>
+                  <><Loader2 className="w-3.5 h-3.5 text-gray-400 animate-spin" /><span className="text-[11px] text-gray-500">Parsing...</span></>
                 ) : (
-                  <><Upload className="w-5 h-5 text-gray-400 mx-auto mb-1" /><p className="text-xs text-gray-600 font-medium">Upload your call script</p><p className="text-[10px] text-gray-400 mt-0.5">Embeds .docx, .pdf, .txt directly</p></>
+                  <><Upload className="w-3.5 h-3.5 text-gray-400" /><span className="text-[11px] text-gray-600 font-medium">Upload .docx / .pdf / .txt</span></>
                 )}
               </button>
             )}
           </div>
 
-          <div className="bg-amber-50 border border-amber-200 rounded-lg p-3">
-            <p className="text-xs font-semibold text-amber-800 mb-1">Voice Call Tips</p>
-            <ul className="text-xs text-amber-700 space-y-0.5">
-              <li>- Voice is always on — just start speaking naturally</li>
-              <li>- Ask questions before pitching. Earn the right to present.</li>
-              <li>- The AI prospect will respond with voice automatically</li>
-              <li>- Click "End Call" when done to get your AI scorecard</li>
-            </ul>
-          </div>
-          {error && <p className="text-red-600 text-sm font-medium">{error}</p>}
-          <button onClick={handleStart} className="w-full bg-[#1565a7] hover:bg-[#1255a0] text-white font-semibold py-3 rounded-lg transition-colors flex items-center justify-center gap-2 text-sm"><Phone className="w-4 h-4" /> Start Voice Call</button>
+          {error && <p className="text-red-600 text-xs font-medium">{error}</p>}
+          <button onClick={handleStart} className="w-full bg-[#1565a7] hover:bg-[#1255a0] text-white font-semibold py-2 rounded transition-colors flex items-center justify-center gap-2 text-sm"><Phone className="w-4 h-4" /> Start Voice Call</button>
         </div>
       </div>
     </div>
@@ -419,6 +400,9 @@ export default function Call() {
   const introOptsRef = useRef<{ jobTitleId: string; scenarioId: string; customPrompt: string } | null>(
     (() => { try { const raw = localStorage.getItem("intro_opts"); return raw ? JSON.parse(raw) : null; } catch { return null; } })()
   );
+  const runIdRef = useRef<string | null>(
+    (() => { try { return localStorage.getItem("current_run_id"); } catch { return null; } })()
+  );
   const [resultFeedback, setResultFeedback] = useState<{ picked: string; suggested: string; correct: boolean } | null>(null);
 
   // Load session
@@ -498,9 +482,14 @@ export default function Call() {
     const opts = { jobTitleId: r.jobTitleId, scenarioId: r.scenarioId, customPrompt: r.customPrompt };
     introOptsRef.current = opts;
     localStorage.setItem("intro_opts", JSON.stringify(opts));
+    // Start a new "run" — every stacked call shares this id and is grouped
+    // together on the summary page when the user clicks End Call.
+    const newRunId = `run_${Date.now()}_${Math.floor(Math.random() * 1e6)}`;
+    runIdRef.current = newRunId;
+    localStorage.setItem("current_run_id", newRunId);
     const config = generateCallConfig({ ...opts, gender: r.gender });
     callConfigRef.current = config;
-    const s = createSession({ productId: DEFAULT_PRODUCT_ID, callConfig: config, script: r.script ?? undefined });
+    const s = createSession({ productId: DEFAULT_PRODUCT_ID, callConfig: config, script: r.script ?? undefined, runId: newRunId });
     setSession(s); setSessionId(s.id);
     setShowIntro(false);
     window.location.hash = `/call/${s.id}`;
@@ -519,7 +508,7 @@ export default function Call() {
     const config = generateCallConfig({ ...introOptsRef.current, gender: newGender });
     callConfigRef.current = config;
     const previousScript = session?.script;
-    const s = createSession({ productId: DEFAULT_PRODUCT_ID, callConfig: config, script: previousScript });
+    const s = createSession({ productId: DEFAULT_PRODUCT_ID, callConfig: config, script: previousScript, runId: runIdRef.current ?? undefined });
     setSession(s); setSessionId(s.id);
     window.location.hash = `/call/${s.id}`;
     setTimeout(() => setMicEnabled(true), 400);
@@ -540,29 +529,27 @@ export default function Call() {
     setTimeout(() => { setResultFeedback(null); advanceToNextCall(); }, 1500);
   };
 
-  const handleEndCall = async () => {
-    if (isEnding || !callConfigRef.current) return;
+  const handleEndCall = () => {
+    if (isEnding) return;
     setIsEnding(true); setEndCallError(null);
     window.speechSynthesis?.cancel(); setMicEnabled(false);
-    try {
-      const { buildScoringPrompt } = await import("@/lib/prompts");
-      const { groqScorecard } = await import("@/lib/groq-client");
-      const scoringPrompt = buildScoringPrompt(callConfigRef.current, DEFAULT_PRODUCT_ID, transcript);
-      const scoringText = await groqScorecard(apiKey, scoringPrompt);
-      let scorecard: any = {};
-      try {
-        let clean = scoringText.trim();
-        if (clean.startsWith("```")) clean = clean.replace(/^```(?:json)?\s*/i, "").replace(/\s*```\s*$/i, "");
-        scorecard = JSON.parse(clean);
-      } catch {
-        const s = scoringText.indexOf("{"), e = scoringText.lastIndexOf("}");
-        if (s >= 0 && e > s) try { scorecard = JSON.parse(scoringText.substring(s, e + 1)); } catch { scorecard = { error: "Parse failed" }; }
-      }
-      updateSession(sessionId!, { status: "completed", endedAt: new Date().toISOString(), transcript, scorecardJson: scorecard });
-      if (timerRef.current) clearInterval(timerRef.current);
-      window.location.hash = `/scorecard/${sessionId}`;
-    } catch (err: any) {
-      setEndCallError(err.message); setIsEnding(false);
+    if (timerRef.current) clearInterval(timerRef.current);
+    // Mark current call as completed (no per-call scorecard — the user wants
+    // a single summary across the whole stacked run).
+    if (sessionId && !session?.scorecardJson) {
+      const existingSc = session?.scorecardJson || null;
+      updateSession(sessionId, {
+        status: "completed",
+        endedAt: new Date().toISOString(),
+        transcript,
+        scorecardJson: existingSc,
+      });
+    }
+    const runId = runIdRef.current;
+    if (runId) {
+      window.location.hash = `/summary/${runId}`;
+    } else {
+      window.location.hash = `/`;
     }
   };
 

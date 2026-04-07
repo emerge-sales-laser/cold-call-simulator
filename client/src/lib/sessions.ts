@@ -15,6 +15,7 @@ export interface Session {
   personaId: string;        // Legacy field — kept for backward compatibility
   productId: string;
   repName: string;          // Legacy field — defaulted to "Sales Rep"
+  runId?: string;           // Groups all stacked calls from one launch
   callConfig?: CallConfig;
   script?: StoredScript;
   status: "active" | "completed";
@@ -46,12 +47,14 @@ export function createSession(opts: {
   productId: string;
   callConfig: CallConfig;
   script?: StoredScript;
+  runId?: string;
 }): Session {
   const session: Session = {
     id: nextId++,
     personaId: opts.callConfig.jobTitleId,
     productId: opts.productId,
     repName: "Sales Rep",
+    runId: opts.runId,
     callConfig: opts.callConfig,
     script: opts.script,
     status: "active",
