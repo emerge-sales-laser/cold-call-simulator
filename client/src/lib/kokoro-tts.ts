@@ -15,68 +15,21 @@ let audioCtx: AudioContext | null = null;
 let scheduledSources: AudioBufferSourceNode[] = [];
 let nextStartTime = 0;
 
-// Kokoro outputs at 24 kHz.
+// Kokoro outputs at 24 kHz. Chromium-only — Firefox audio output was
+// unfixable across multiple approaches and is officially unsupported.
 const KOKORO_SAMPLE_RATE = 24000;
 
-// Positively identify Chromium-based browsers for the low-latency streaming
-// Web Audio path. EVERYTHING ELSE (Firefox, Safari, anything spoofed,
-// anything we're not sure about) falls through to the reliable WAV blob +
-// HTMLAudioElement path.
-function isChromium(): boolean {
-  if (typeof navigator === "undefined" || typeof window === "undefined") return false;
-  // Firefox & Safari short-circuit
-  if (/Firefox|FxiOS/i.test(navigator.userAgent)) return false;
-  if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent)) return false;
-  // Has the chrome global AND is Blink-based
-  if (!(window as any).chrome) return false;
-  return /Chrome|Chromium|Edg|OPR/.test(navigator.userAgent);
-}
-const USE_STREAMING_WEBAUDIO = isChromium();
-console.log("[Kokoro] playback path =", USE_STREAMING_WEBAUDIO ? "Web Audio streaming (Chromium)" : "HTMLAudioElement WAV (universal)");
-
-/** Pack Float32 mono samples into a 16-bit PCM WAV Blob. */
-function float32ToWavBlob(samples: Float32Array, sampleRate: number): Blob {
-  const numChannels = 1;
-  const bytesPerSample = 2;
-  const blockAlign = numChannels * bytesPerSample;
-  const byteRate = sampleRate * blockAlign;
-  const dataSize = samples.length * bytesPerSample;
-  const buffer = new ArrayBuffer(44 + dataSize);
-  const view = new DataView(buffer);
-  const writeStr = (off: number, s: string) => { for (let i = 0; i < s.length; i++) view.setUint8(off + i, s.charCodeAt(i)); };
-  writeStr(0, "RIFF");
-  view.setUint32(4, 36 + dataSize, true);
-  writeStr(8, "WAVE");
-  writeStr(12, "fmt ");
-  view.setUint32(16, 16, true);          // PCM chunk size
-  view.setUint16(20, 1, true);           // PCM format
-  view.setUint16(22, numChannels, true);
-  view.setUint32(24, sampleRate, true);
-  view.setUint32(28, byteRate, true);
-  view.setUint16(32, blockAlign, true);
-  view.setUint16(34, 16, true);          // bits per sample
-  writeStr(36, "data");
-  view.setUint32(40, dataSize, true);
-  let off = 44;
-  for (let i = 0; i < samples.length; i++) {
-    const s = Math.max(-1, Math.min(1, samples[i]));
-    view.setInt16(off, s < 0 ? s * 0x8000 : s * 0x7FFF, true);
-    off += 2;
-  }
-  return new Blob([buffer], { type: "audio/wav" });
+export function isFirefox(): boolean {
+  return typeof navigator !== "undefined" && /Firefox|FxiOS/i.test(navigator.userAgent);
 }
 
 function getAudioContext(): AudioContext {
   if (!audioCtx || audioCtx.state === "closed") {
     const Ctor = window.AudioContext || (window as any).webkitAudioContext;
-    // Use the browser's native rate. AudioBuffers at a different rate are
-    // auto-resampled per spec. Forcing a non-standard rate breaks Firefox
-    // on devices where the output stream can't be opened at that rate.
     audioCtx = new Ctor();
-    console.log("[Kokoro] AudioContext created", { state: audioCtx.state, sampleRate: audioCtx.sampleRate });
   }
   if (audioCtx.state === "suspended") {
-    audioCtx.resume().then(() => console.log("[Kokoro] AudioContext resumed", audioCtx?.state)).catch((e) => console.warn("[Kokoro] resume failed", e));
+    audioCtx.resume().catch(() => {});
   }
   return audioCtx;
 }
@@ -328,76 +281,36 @@ export async function streamSpeakWithKokoro(
     await ensureContextRunning(ctx);
     nextStartTime = 0;
 
-    if (!USE_STREAMING_WEBAUDIO) {
-      // Universal path: collect every chunk, concatenate, encode as a real
-      // WAV blob, play through HTMLAudioElement. Bypasses Web Audio
-      // entirely — no AudioContext suspension issues, no boundary glitches
-      // between sources, no live resampling crackle. Used everywhere
-      // except positively-identified Chromium.
-      console.log("[Kokoro] WAV/HTMLAudio path engaged");
-      const collected: Float32Array[] = [];
-      let sr = KOKORO_SAMPLE_RATE;
-      while (!isAborted()) {
-        if (audioQueue.length === 0) {
-          if (producerDone) break;
-          await new Promise<void>(r => { queueWaiter.fn = r; });
-          continue;
-        }
-        const chunk = audioQueue.shift()!;
-        sr = chunk.sampleRate;
-        const owned = new Float32Array(chunk.samples.length);
-        owned.set(chunk.samples);
-        collected.push(owned);
+    // Chromium streaming Web Audio path: schedule each chunk back-to-back
+    // for sub-second first-audio latency. Chrome/Edge only.
+    let playedFirst = false;
+    let lastEndPromise: Promise<void> = Promise.resolve();
+    while (!isAborted()) {
+      if (audioQueue.length === 0) {
+        if (producerDone) break;
+        await new Promise<void>(r => { queueWaiter.fn = r; });
+        continue;
       }
-      const totalLen = collected.reduce((s, a) => s + a.length, 0);
-      if (totalLen > 0) {
-        const merged = new Float32Array(totalLen);
-        let offset = 0;
-        for (const c of collected) { merged.set(c, offset); offset += c.length; }
-        const blob = float32ToWavBlob(merged, sr);
-        const url = URL.createObjectURL(blob);
-        currentUrl = url;
-        const el = new Audio(url);
-        el.volume = 1; el.muted = false;
-        currentAudio = el;
-        callbacks?.onFirstAudio?.();
-        await new Promise<void>((res) => {
-          el.onended = () => { try { URL.revokeObjectURL(url); } catch {}; res(); };
-          el.onerror = (e) => { console.warn("[Kokoro FF] audio error", e); try { URL.revokeObjectURL(url); } catch {}; res(); };
-          el.play().catch((e) => { console.warn("[Kokoro FF] play() rejected", e); res(); });
-        });
+      const chunk = audioQueue.shift()!;
+      const owned = new Float32Array(chunk.samples.length);
+      owned.set(chunk.samples);
+      const buffer = ctx.createBuffer(1, owned.length, chunk.sampleRate);
+      buffer.getChannelData(0).set(owned);
+      const src = ctx.createBufferSource();
+      src.buffer = buffer;
+      src.connect(ctx.destination);
+      const startAt = Math.max(ctx.currentTime + 0.02, nextStartTime);
+      try { src.start(startAt); } catch { continue; }
+      nextStartTime = startAt + buffer.duration;
+      scheduledSources.push(src);
+      if (!playedFirst) {
+        playedFirst = true;
+        const delayMs = Math.max(0, (startAt - ctx.currentTime) * 1000);
+        setTimeout(() => callbacks?.onFirstAudio?.(), delayMs);
       }
-    } else {
-      // Chromium path: stream chunks, schedule back-to-back for low latency.
-      let playedFirst = false;
-      let lastEndPromise: Promise<void> = Promise.resolve();
-      while (!isAborted()) {
-        if (audioQueue.length === 0) {
-          if (producerDone) break;
-          await new Promise<void>(r => { queueWaiter.fn = r; });
-          continue;
-        }
-        const chunk = audioQueue.shift()!;
-        const owned = new Float32Array(chunk.samples.length);
-        owned.set(chunk.samples);
-        const buffer = ctx.createBuffer(1, owned.length, chunk.sampleRate);
-        buffer.getChannelData(0).set(owned);
-        const src = ctx.createBufferSource();
-        src.buffer = buffer;
-        src.connect(ctx.destination);
-        const startAt = Math.max(ctx.currentTime + 0.02, nextStartTime);
-        try { src.start(startAt); } catch { continue; }
-        nextStartTime = startAt + buffer.duration;
-        scheduledSources.push(src);
-        if (!playedFirst) {
-          playedFirst = true;
-          const delayMs = Math.max(0, (startAt - ctx.currentTime) * 1000);
-          setTimeout(() => callbacks?.onFirstAudio?.(), delayMs);
-        }
-        lastEndPromise = new Promise<void>((res) => { src.onended = () => res(); });
-      }
-      await lastEndPromise;
+      lastEndPromise = new Promise<void>((res) => { src.onended = () => res(); });
     }
+    await lastEndPromise;
 
     await producer.catch(() => {});
     await collector.catch(() => {});

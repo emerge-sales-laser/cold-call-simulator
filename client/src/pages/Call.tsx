@@ -7,7 +7,7 @@ import { buildCallSystemPrompt } from "@/lib/prompts";
 import { groqChatStream, groqWhisper } from "@/lib/groq-client";
 import { createSession, getSession, updateSession, addMessageToSession, type Session, type StoredScript } from "@/lib/sessions";
 import { parseScriptFile, getAcceptedFileTypes } from "@/lib/file-parser";
-import { preloadKokoro, kokoroReady, isKokoroReady, streamSpeakWithKokoro, stopKokoro, unlockAudio, KOKORO_VOICES, pickRandomVoice, voiceGender } from "@/lib/kokoro-tts";
+import { preloadKokoro, kokoroReady, isKokoroReady, streamSpeakWithKokoro, stopKokoro, unlockAudio, isFirefox, KOKORO_VOICES, pickRandomVoice, voiceGender } from "@/lib/kokoro-tts";
 
 // ── Types ────────────────────────────────────────────────────────────────────
 interface Message { role: "rep" | "prospect"; content: string; }
@@ -63,6 +63,7 @@ interface IntroResult {
 }
 
 function IntroPopup({ onStart }: { onStart: (r: IntroResult) => void }) {
+  const firefox = isFirefox();
   const [apiKey, setApiKey] = useState(() => localStorage.getItem("groq_api_key") || "");
   const [selectedJob, setSelectedJob] = useState<string>("");
   const [scenarioId, setScenarioId] = useState<string>("standard");
@@ -104,6 +105,7 @@ function IntroPopup({ onStart }: { onStart: (r: IntroResult) => void }) {
   };
 
   const handleStart = () => {
+    if (firefox) { setError("Firefox is not supported. Please use Chrome or Edge."); return; }
     if (!apiKey.trim()) { setError("Groq API key is required. Get one free at console.groq.com/keys"); return; }
     if (!selectedJob) { setError("Select a position to call"); return; }
     if (scenarioId === "custom" && !customPrompt.trim()) { setError("Custom prompt cannot be empty"); return; }
@@ -218,10 +220,15 @@ function IntroPopup({ onStart }: { onStart: (r: IntroResult) => void }) {
             )}
           </div>
 
+          {firefox && (
+            <div className="bg-red-50 border border-red-300 rounded p-2.5 text-xs text-red-800">
+              <strong>Firefox is not supported.</strong> Please reopen this page in Chrome or Edge — Firefox cannot play the Kokoro voice model cleanly.
+            </div>
+          )}
           {error && <p className="text-red-600 text-xs font-medium">{error}</p>}
-          <button onClick={handleStart} disabled={!voiceLoaded}
+          <button onClick={handleStart} disabled={!voiceLoaded || firefox}
             className="w-full bg-[#1565a7] hover:bg-[#1255a0] disabled:bg-gray-400 disabled:cursor-not-allowed text-white font-semibold py-2 rounded transition-colors flex items-center justify-center gap-2 text-sm">
-            {voiceLoaded ? <><Phone className="w-4 h-4" /> Start Voice Call</> : <><Loader2 className="w-4 h-4 animate-spin" /> Loading voice model...</>}
+            {firefox ? <><Phone className="w-4 h-4" /> Chrome / Edge required</> : voiceLoaded ? <><Phone className="w-4 h-4" /> Start Voice Call</> : <><Loader2 className="w-4 h-4 animate-spin" /> Loading voice model...</>}
           </button>
           <p className="text-[10px] text-gray-400 text-center">{voiceLoaded ? "Voice model ready (Kokoro TTS — runs entirely in your browser)." : "Powered by Kokoro TTS — first load downloads ~100 MB, then it's cached."}</p>
         </div>
