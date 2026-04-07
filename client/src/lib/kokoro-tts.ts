@@ -15,10 +15,42 @@ let audioCtx: AudioContext | null = null;
 let scheduledSources: AudioBufferSourceNode[] = [];
 let nextStartTime = 0;
 
-// Kokoro outputs at 24 kHz. Forcing the AudioContext to the same rate
-// avoids the browser's automatic resampling step.
+// Kokoro outputs at 24 kHz.
 const KOKORO_SAMPLE_RATE = 24000;
-const IS_FIREFOX = typeof navigator !== "undefined" && /firefox/i.test(navigator.userAgent);
+const IS_FIREFOX = typeof navigator !== "undefined" &&
+  (/Firefox\//i.test(navigator.userAgent) || /Gecko\//.test(navigator.userAgent) && !/like Gecko/.test(navigator.userAgent));
+
+/** Pack Float32 mono samples into a 16-bit PCM WAV Blob. */
+function float32ToWavBlob(samples: Float32Array, sampleRate: number): Blob {
+  const numChannels = 1;
+  const bytesPerSample = 2;
+  const blockAlign = numChannels * bytesPerSample;
+  const byteRate = sampleRate * blockAlign;
+  const dataSize = samples.length * bytesPerSample;
+  const buffer = new ArrayBuffer(44 + dataSize);
+  const view = new DataView(buffer);
+  const writeStr = (off: number, s: string) => { for (let i = 0; i < s.length; i++) view.setUint8(off + i, s.charCodeAt(i)); };
+  writeStr(0, "RIFF");
+  view.setUint32(4, 36 + dataSize, true);
+  writeStr(8, "WAVE");
+  writeStr(12, "fmt ");
+  view.setUint32(16, 16, true);          // PCM chunk size
+  view.setUint16(20, 1, true);           // PCM format
+  view.setUint16(22, numChannels, true);
+  view.setUint32(24, sampleRate, true);
+  view.setUint32(28, byteRate, true);
+  view.setUint16(32, blockAlign, true);
+  view.setUint16(34, 16, true);          // bits per sample
+  writeStr(36, "data");
+  view.setUint32(40, dataSize, true);
+  let off = 44;
+  for (let i = 0; i < samples.length; i++) {
+    const s = Math.max(-1, Math.min(1, samples[i]));
+    view.setInt16(off, s < 0 ? s * 0x8000 : s * 0x7FFF, true);
+    off += 2;
+  }
+  return new Blob([buffer], { type: "audio/wav" });
+}
 
 function getAudioContext(): AudioContext {
   if (!audioCtx || audioCtx.state === "closed") {
@@ -283,9 +315,11 @@ export async function streamSpeakWithKokoro(
     nextStartTime = 0;
 
     if (IS_FIREFOX) {
-      // Firefox glitches at AudioBufferSourceNode boundaries when chained
-      // sources are scheduled back-to-back. Buffer everything, concatenate
-      // into one continuous Float32Array, and play as a single source.
+      // Firefox: collect every chunk, concatenate, encode as a real WAV
+      // Blob, and play through HTMLAudioElement. Bypasses Web Audio
+      // entirely — no AudioContext suspension issues, no boundary
+      // glitches between sources, no live resampling crackle.
+      console.log("[Kokoro] using Firefox HTMLAudioElement path");
       const collected: Float32Array[] = [];
       let sr = KOKORO_SAMPLE_RATE;
       while (!isAborted()) {
@@ -301,22 +335,21 @@ export async function streamSpeakWithKokoro(
         collected.push(owned);
       }
       const totalLen = collected.reduce((s, a) => s + a.length, 0);
-      if (totalLen === 0) { /* nothing to play */ }
-      else {
+      if (totalLen > 0) {
         const merged = new Float32Array(totalLen);
         let offset = 0;
         for (const c of collected) { merged.set(c, offset); offset += c.length; }
-        const buffer = ctx.createBuffer(1, merged.length, sr);
-        buffer.getChannelData(0).set(merged);
-        await ensureContextRunning(ctx);
-        const src = ctx.createBufferSource();
-        src.buffer = buffer;
-        src.connect(ctx.destination);
-        scheduledSources.push(src);
+        const blob = float32ToWavBlob(merged, sr);
+        const url = URL.createObjectURL(blob);
+        currentUrl = url;
+        const el = new Audio(url);
+        el.volume = 1; el.muted = false;
+        currentAudio = el;
         callbacks?.onFirstAudio?.();
         await new Promise<void>((res) => {
-          src.onended = () => res();
-          try { src.start(); } catch { res(); }
+          el.onended = () => { try { URL.revokeObjectURL(url); } catch {}; res(); };
+          el.onerror = (e) => { console.warn("[Kokoro FF] audio error", e); try { URL.revokeObjectURL(url); } catch {}; res(); };
+          el.play().catch((e) => { console.warn("[Kokoro FF] play() rejected", e); res(); });
         });
       }
     } else {
