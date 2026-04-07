@@ -102,22 +102,22 @@ function IntroPopup({ onStart }: { onStart: (r: IntroResult) => void }) {
 
   const renderJobButton = (j: typeof JOB_TITLES[number]) => (
     <button key={j.id} onClick={() => setSelectedJob(j.id)}
-      className={`text-left p-2 rounded-md border-2 transition-all text-xs ${selectedJob === j.id ? "border-[#1565a7] bg-blue-50 ring-1 ring-blue-200" : "border-gray-200 hover:border-gray-300"}`}>
-      <div className="font-semibold text-gray-900 text-xs">{j.label}</div>
-      <div className="text-[9px] text-gray-500 leading-tight">{j.fullTitle}</div>
+      className={`text-left p-2.5 rounded-md border-2 transition-all ${selectedJob === j.id ? "border-[#1565a7] bg-blue-50 ring-1 ring-blue-200" : "border-gray-200 hover:border-gray-300"}`}>
+      <div className="font-semibold text-gray-900 text-sm">{j.label}</div>
+      <div className="text-[10px] text-gray-500 leading-tight mt-0.5">{j.fullTitle}</div>
     </button>
   );
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center p-2">
-      <div className="bg-white rounded-lg shadow-2xl w-full max-w-xl max-h-[96vh] overflow-y-auto">
-        <div className="bg-[#1565a7] text-white px-4 py-2.5 rounded-t-lg">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center"><Phone className="w-4 h-4" /></div>
-            <div><h1 className="font-bold text-sm">MedDevice Cold Call Simulator</h1><p className="text-blue-200 text-[10px]">by Emerge — Voice-Powered AI Training</p></div>
+    <div className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center p-4">
+      <div className="bg-white rounded-xl shadow-2xl w-full max-w-3xl max-h-[94vh] flex flex-col overflow-hidden">
+        <div className="bg-[#1565a7] text-white px-6 py-4 flex-shrink-0">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-lg bg-white/20 flex items-center justify-center"><Phone className="w-5 h-5" /></div>
+            <div><h1 className="font-bold text-lg">MedDevice Cold Call Simulator</h1><p className="text-blue-200 text-xs">by Emerge — Voice-Powered AI Training</p></div>
           </div>
         </div>
-        <div className="px-4 py-3 space-y-3">
+        <div className="px-6 py-4 space-y-4 overflow-y-auto">
           <div>
             <label className="text-xs font-semibold text-gray-700 block mb-1">Groq API Key</label>
             <input type="password" value={apiKey} onChange={(e) => setApiKey(e.target.value)} placeholder="gsk_..."
@@ -375,6 +375,74 @@ function ScriptViewer({ script }: { script: StoredScript }) {
   );
 }
 
+// ── CRM Preview Shell (rendered behind the intro modal) ─────────────────────
+function CrmPreviewShell() {
+  const sampleResults = ["NO", "NC", "NA-HOT", "LM", "CCC", "EMAIL", "WW", "DNC"];
+  const sampleResultColors: Record<string, string> = RESULT_COLORS;
+  return (
+    <div className="min-h-screen flex flex-col bg-[#e8ecf0] font-sans text-xs pointer-events-none select-none" aria-hidden>
+      <div className="bg-[#2980c9] px-3 py-1 flex items-center justify-between flex-shrink-0">
+        <span className="text-white font-semibold text-xs">Emerge Sales Leads</span>
+      </div>
+      <div className="flex flex-1 overflow-hidden" style={{ minHeight: "calc(100vh - 26px)" }}>
+        {/* LEFT */}
+        <div className="w-56 bg-white border-r border-gray-300 flex flex-col flex-shrink-0">
+          <div className="px-3 py-3 border-b border-gray-200">
+            <div className="font-bold text-sm text-gray-900">Sample Prospect</div>
+            <div className="text-gray-600 mt-0.5">Chief Executive Officer</div>
+            <div className="mt-2"><div className="font-semibold text-gray-800">Sample Company</div><div className="text-gray-600 mt-0.5">Medical Device</div></div>
+            <div className="mt-3 space-y-1.5">
+              <div className="flex items-center gap-2"><div className="w-5 h-5 rounded-full bg-[#1565a7] flex items-center justify-center"><span className="text-white text-[9px] font-bold">E</span></div><span className="text-blue-700 text-xs">contact@example.com</span></div>
+              <div className="flex items-center gap-2"><div className="w-5 h-5 rounded-full bg-[#1565a7] flex items-center justify-center"><span className="text-white text-[9px] font-bold">P</span></div><span className="text-gray-700">(555) 555-0100</span></div>
+            </div>
+          </div>
+          <div className="px-3 py-2 border-b border-gray-200"><div className="text-gray-500 mb-1">Lead Status</div><div className="bg-yellow-400 text-black font-semibold px-2 py-0.5 rounded text-xs inline-block">New</div></div>
+          <div className="px-3 py-2 border-b border-gray-200 space-y-1 text-[11px]">
+            <div className="flex justify-between"><span className="text-gray-500">Contact Time</span><span className="font-mono text-green-700 font-semibold">00:00</span></div>
+            <div className="flex justify-between"><span className="text-gray-500">Date</span><span className="text-gray-700">{new Date().toLocaleDateString("en-US", { month: "2-digit", day: "2-digit", year: "numeric" })}</span></div>
+            <div className="flex justify-between"><span className="text-gray-500">Scenario</span><span className="text-gray-700">—</span></div>
+            <div className="flex justify-between"><span className="text-gray-500">Exchanges</span><span className="text-gray-700">0</span></div>
+          </div>
+          <div className="px-3 py-2 flex-1"><div className="text-gray-500 mb-1 text-[11px]">Call Notes</div><div className="text-[11px] border border-gray-300 rounded p-1.5 min-h-[80px] text-gray-300 italic">Type notes...</div></div>
+        </div>
+        {/* CENTER */}
+        <div className="flex-1 flex flex-col min-w-0 bg-white border-r border-gray-300">
+          <div className="flex border-b border-gray-300 bg-gray-50 flex-shrink-0">
+            {["Call Transcript", "Demographics", "Script"].map((tab, i) => (
+              <div key={tab} className={`px-4 py-2 text-xs border-r border-gray-300 ${i === 0 ? "bg-white text-[#1565a7] font-semibold border-b-2 border-b-[#1565a7]" : "text-gray-600"}`}>{tab}</div>
+            ))}
+          </div>
+          <div className="flex-1 flex flex-col p-3 gap-3">
+            <div className="flex items-center justify-center gap-2 py-2 bg-blue-50 border border-blue-200 rounded-lg">
+              <div className="w-2 h-2 rounded-full bg-green-500" />
+              <span className="text-xs text-green-700">Voice ready</span>
+            </div>
+            <div className="flex-1 flex items-center justify-center text-gray-400">
+              <div className="text-center">
+                <p className="text-sm font-medium">Call is connected</p>
+                <p className="text-xs mt-1">Configure your call to begin.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/* RIGHT */}
+        <div className="w-48 bg-white flex flex-col flex-shrink-0">
+          <div className="p-2 border-b border-gray-200 bg-gray-50">
+            <div className="w-full flex items-center justify-center gap-1.5 bg-red-600 text-white text-xs font-semibold py-2 rounded opacity-60">
+              <PhoneOff className="w-3.5 h-3.5" /> End Call
+            </div>
+          </div>
+          <div className="p-2 border-b border-gray-200">
+            <div className="text-gray-500 text-[10px] uppercase tracking-wide mb-1.5">Call Result</div>
+            <div className="space-y-1">{sampleResults.map(r => <div key={r} className={`w-full text-left px-3 py-1.5 rounded text-xs font-bold text-white opacity-80 ${sampleResultColors[r]}`}>{r}</div>)}</div>
+          </div>
+          <div className="flex-1 p-2"><div className="text-gray-500 text-[10px] uppercase tracking-wide mb-2">Exchange Grades</div><p className="text-[10px] text-gray-400 italic">Grades appear after each exchange.</p></div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // ── Main Call Component ──────────────────────────────────────────────────────
 export default function Call() {
   const { id } = useParams<{ id: string }>();
@@ -560,9 +628,8 @@ export default function Call() {
 
   if (showIntro) {
     return (
-      <div className="min-h-screen bg-[#e8ecf0]">
-        <div className="bg-[#2980c9] px-3 py-1"><span className="text-white font-semibold text-xs">Emerge Sales Leads</span></div>
-        <div className="h-[calc(100vh-30px)] bg-[#e8ecf0]" />
+      <div className="min-h-screen bg-[#e8ecf0] font-sans text-xs">
+        <CrmPreviewShell />
         <IntroPopup onStart={handleIntroStart} />
       </div>
     );
