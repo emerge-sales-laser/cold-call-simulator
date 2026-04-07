@@ -142,10 +142,11 @@ export async function speakWithKokoro(
     const tts = await withTimeout(getTTS(), 60_000, "Kokoro model load");
     const voice = resolveVoice(opts);
     const result: any = await withTimeout(tts.generate(text, { voice }), 30_000, "Kokoro generate");
-    const blob: Blob = typeof result.toBlob === "function" ? result.toBlob() : result;
+    const samples: Float32Array = result.audio;
+    const sampleRate: number = result.sampling_rate || 24000;
     const ctx = getAudioContext();
-    const arrayBuf = await blob.arrayBuffer();
-    const buffer = await ctx.decodeAudioData(arrayBuf.slice(0));
+    const buffer = ctx.createBuffer(1, samples.length, sampleRate);
+    buffer.copyToChannel(samples, 0);
     const src = ctx.createBufferSource();
     src.buffer = buffer;
     src.connect(ctx.destination);
@@ -195,8 +196,10 @@ export async function streamSpeakWithKokoro(
       callbacks?.onAllText?.(fullText);
     })();
 
-    // Producer 2: collect audio chunks emitted from kokoro
-    const audioQueue: Blob[] = [];
+    // Producer 2: collect raw PCM samples (Float32) from each kokoro chunk.
+    // Avoid WAV blob -> decodeAudioData (Firefox is strict about headers).
+    interface RawChunk { samples: Float32Array; sampleRate: number; }
+    const audioQueue: RawChunk[] = [];
     let queueWaiter: { fn: (() => void) | null } = { fn: null };
     let producerDone = false;
     const collector = (async () => {
@@ -205,8 +208,10 @@ export async function streamSpeakWithKokoro(
           if (isAborted()) break;
           const audio = item?.audio;
           if (!audio) continue;
-          const blob: Blob = typeof audio.toBlob === "function" ? audio.toBlob() : audio;
-          audioQueue.push(blob);
+          const samples: Float32Array | undefined = audio.audio;
+          const sampleRate: number = audio.sampling_rate || 24000;
+          if (!samples || !samples.length) continue;
+          audioQueue.push({ samples, sampleRate });
           const w = queueWaiter.fn; queueWaiter.fn = null; w?.();
         }
       } catch (e) {
@@ -231,15 +236,9 @@ export async function streamSpeakWithKokoro(
         await new Promise<void>(r => { queueWaiter.fn = r; });
         continue;
       }
-      const blob = audioQueue.shift()!;
-      let buffer: AudioBuffer;
-      try {
-        const arrayBuf = await blob.arrayBuffer();
-        buffer = await ctx.decodeAudioData(arrayBuf.slice(0));
-      } catch (e) {
-        console.warn("[Kokoro] decode failed", e);
-        continue;
-      }
+      const chunk = audioQueue.shift()!;
+      const buffer = ctx.createBuffer(1, chunk.samples.length, chunk.sampleRate);
+      buffer.copyToChannel(chunk.samples, 0);
       const src = ctx.createBufferSource();
       src.buffer = buffer;
       src.connect(ctx.destination);
